@@ -15,6 +15,9 @@ export default function HomePage() {
       setLoading(true);
       try {
         const res = await fetch(`/api/rankings?league=${league}`);
+        if (!res.ok) {
+          throw new Error('Failed to fetch rankings');
+        }
         const json = (await res.json()) as RankingResponse;
         if (mounted) setData(json);
       } finally {

@@ -11,7 +11,7 @@ export interface RankingPlayer {
 export interface RankingResponse {
   league: League;
   fetchedAt: string;
-  source: 'live' | 'fallback';
+  source: 'supabase' | 'fallback';
   rankings: RankingPlayer[];
   japaneseInRanking: boolean;
 }
