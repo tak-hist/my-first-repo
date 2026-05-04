@@ -12,34 +12,32 @@ export async function GET(request: NextRequest) {
   const leagueParam = request.nextUrl.searchParams.get('league');
   const league: League = isLeague(leagueParam) ? leagueParam : 'al';
 
-  try {
-    const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
 
-    const { data, error } = await supabase
-      .from('rankings')
-      .select('league, data, updated_at')
-      .eq('league', league)
-      .order('updated_at', { ascending: false })
-      .limit(1)
-      .maybeSingle();
+  const { data, error } = await supabase
+    .from('rankings')
+    .select('league, data, updated_at')
+    .eq('league', league)
+    .order('updated_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
 
-    if (error) throw error;
+  if (error) {
+    return NextResponse.json({ message: 'Failed to load rankings from Supabase.' }, { status: 500 });
+  }
 
-    const rankings = (data?.data as RankingPlayer[] | null) ?? null;
+  const rankings = (data?.data as RankingPlayer[] | null) ?? null;
 
-    if (rankings && rankings.length > 0) {
-      const payload: RankingResponse = {
-        league,
-        fetchedAt: data?.updated_at ?? new Date().toISOString(),
-        source: 'supabase',
-        japaneseInRanking: rankings.some((item) => item.isJapanese),
-        rankings
-      };
-      return NextResponse.json(payload, { status: 200 });
-    }
-  } catch {
-    // fall through to fallback response
+  if (rankings && rankings.length > 0) {
+    const payload: RankingResponse = {
+      league,
+      fetchedAt: data?.updated_at ?? new Date().toISOString(),
+      source: 'supabase',
+      japaneseInRanking: rankings.some((item) => item.isJapanese),
+      rankings
+    };
+    return NextResponse.json(payload, { status: 200 });
   }
 
   const fallbackRankings = getFallbackData(league);
