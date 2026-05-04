@@ -12,8 +12,8 @@ npm run dev
 ## 構成
 
 - `app/page.tsx`: トップページUI
-- `app/api/rankings/route.ts`: Yahoo! MLB統計を取得するAPI Route
-- `lib/scrapeYahoo.ts`: スクレイピング処理
+- `app/api/rankings/route.ts`: Supabaseのrankingsテーブルから最新ランキングを返すAPI Route
+- `utils/supabase/*`: Supabaseクライアントヘルパー
 - `lib/fallbackData.ts`: 取得失敗時のサンプルデータ
 
 ## Vercel公開
