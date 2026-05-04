@@ -1,0 +1,14 @@
+.main { max-width: 700px; margin: 0 auto; padding: 16px; }
+.title { text-align: center; margin: 8px 0 16px; font-size: 1.5rem; }
+.tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.tab { border: 1px solid #ccd4e0; border-radius: 8px; background: #fff; padding: 10px; font-weight: 600; }
+.tabActive { background: #1f5bd6; color: #fff; border-color: #1f5bd6; }
+.notice { margin: 8px 0; padding: 8px 10px; border-radius: 8px; font-size: .9rem; }
+.loading { background: #e6f4ff; color: #0b4a7f; }
+.fallback { background: #fff1f0; color: #8c1d18; }
+.card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(18,33,71,.08); }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { padding: 10px 8px; border-bottom: 1px solid #edf0f4; text-align: left; font-size: .9rem; }
+.jpRow { background: #fff8db; font-weight: 700; }
+.footer { margin-top: 12px; font-size: .9rem; }
+.updated { margin-top: 8px; color: #50607a; font-size: .8rem; }
